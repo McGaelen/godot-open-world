@@ -1,0 +1,107 @@
+[gd_scene load_steps=9 format=3 uid="uid://dt78kivgo57sv"]
+
+[ext_resource type="Script" path="res://root.gd" id="1_c0blr"]
+[ext_resource type="PackedScene" uid="uid://dwww361gxkl54" path="res://lib/player/player.tscn" id="2_11sca"]
+[ext_resource type="PackedScene" uid="uid://dul76tym461sm" path="res://lib/door/door.tscn" id="5_1gxm1"]
+[ext_resource type="PackedScene" uid="uid://tnda8kk4qh0a" path="res://rooms/room1/room1.tscn" id="8_i8bh3"]
+[ext_resource type="PackedScene" uid="uid://dd8mqggpymp0l" path="res://rooms/room2/room2.tscn" id="8_xlrlj"]
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_7v2mk"]
+rayleigh_color = Color(0.196078, 0.443137, 1, 1)
+turbidity = 6.17
+sun_disk_scale = 0.0
+ground_color = Color(0.760784, 0.862745, 0.956863, 1)
+energy_multiplier = 4.78
+
+[sub_resource type="Sky" id="Sky_xr4gv"]
+sky_material = SubResource("PhysicalSkyMaterial_7v2mk")
+
+[sub_resource type="Environment" id="Environment_6rfdu"]
+background_mode = 2
+background_color = Color(0.498039, 0.498039, 0.498039, 1)
+sky = SubResource("Sky_xr4gv")
+ambient_light_source = 3
+reflected_light_source = 2
+sdfgi_use_occlusion = true
+fog_sun_scatter = 0.35
+fog_density = 0.0073
+volumetric_fog_density = 0.018
+
+[node name="root" type="Node3D"]
+script = ExtResource("1_c0blr")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.490886, -0.858554, 0.148041, -0.745183, -0.325729, 0.581896, -0.451367, -0.395963, -0.799676, -0.0339406, 3.60665, 0.358706)
+light_indirect_energy = 4.09
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_6rfdu")
+
+[node name="player" parent="." instance=ExtResource("2_11sca")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.68524, 4.04638, 1.63866)
+
+[node name="doors" type="Node" parent="."]
+
+[node name="door1" parent="doors" node_paths=PackedStringArray("room_A", "room_B") instance=ExtResource("5_1gxm1")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -10.0445, 1, 0)
+room_A = NodePath("../../rooms/room1")
+room_B = NodePath("../../rooms/room2")
+
+[node name="door2" parent="doors" node_paths=PackedStringArray("room_A", "room_B") instance=ExtResource("5_1gxm1")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -20.693, 1, -4.54324)
+room_A = NodePath("../../rooms/room2")
+room_B = NodePath("../../rooms/room3")
+
+[node name="door3" parent="doors" node_paths=PackedStringArray("room_A", "room_B") instance=ExtResource("5_1gxm1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.5536, 1, -11.1831)
+room_A = NodePath("../../rooms/room3")
+room_B = NodePath("../../rooms/room4")
+
+[node name="door4" parent="doors" node_paths=PackedStringArray("room_A", "room_B") instance=ExtResource("5_1gxm1")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -25.5242, 1, -19.983)
+room_A = NodePath("../../rooms/room4")
+room_B = NodePath("../../rooms/room5")
+
+[node name="door5" parent="doors" node_paths=PackedStringArray("room_A", "room_B") instance=ExtResource("5_1gxm1")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -14.871, 1, -22.6213)
+room_A = NodePath("../../rooms/room5")
+room_B = NodePath("../../rooms/room6")
+
+[node name="door6" parent="doors" node_paths=PackedStringArray("room_A", "room_B") instance=ExtResource("5_1gxm1")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -0.57391, 1, -20.0695)
+room_A = NodePath("../../rooms/room6")
+room_B = NodePath("../../rooms/room7")
+
+[node name="door7" parent="doors" node_paths=PackedStringArray("room_A", "room_B") instance=ExtResource("5_1gxm1")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 1.84657, 1, -9.98652)
+room_A = NodePath("../../rooms/room7")
+room_B = NodePath("../../rooms/room1")
+
+[node name="rooms" type="Node" parent="."]
+
+[node name="room1" parent="rooms" instance=ExtResource("8_i8bh3")]
+
+[node name="room2" parent="rooms" instance=ExtResource("8_xlrlj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.3681, 0, -1.00135)
+visible = false
+
+[node name="room3" parent="rooms" instance=ExtResource("8_i8bh3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.6532, 0, -1.18499)
+visible = false
+
+[node name="room4" parent="rooms" instance=ExtResource("8_xlrlj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.8455, 0, -16.2108)
+visible = false
+
+[node name="room5" parent="rooms" instance=ExtResource("8_xlrlj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.1885, 0, -21.2652)
+visible = false
+
+[node name="room6" parent="rooms" instance=ExtResource("8_i8bh3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.82204, 0, -30.0611)
+visible = false
+
+[node name="room7" parent="rooms" instance=ExtResource("8_xlrlj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.192449, 0, -15.0306)
+visible = false
