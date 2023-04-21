@@ -3,16 +3,16 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bam03c7a7vo77"
-path.s3tc="res://.godot/imported/sfknaeoa_4K_Normal.jpg-7c25a1ed635baff72ea8a20784439d59.s3tc.ctex"
+path.etc2="res://.godot/imported/sfknaeoa_4K_Normal.jpg-7c25a1ed635baff72ea8a20784439d59.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://materials/Grass_Wild_sfknaeoa_4K_surface_ms/sfknaeoa_4K_Normal.jpg"
-dest_files=["res://.godot/imported/sfknaeoa_4K_Normal.jpg-7c25a1ed635baff72ea8a20784439d59.s3tc.ctex"]
+dest_files=["res://.godot/imported/sfknaeoa_4K_Normal.jpg-7c25a1ed635baff72ea8a20784439d59.etc2.ctex"]
 
 [params]
 
