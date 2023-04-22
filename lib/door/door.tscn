@@ -2,7 +2,9 @@
 
 [ext_resource type="Script" path="res://lib/door/door.gd" id="1_r2hxr"]
 [ext_resource type="Animation" uid="uid://c454342hqjtvt" path="res://lib/door/door_open.res" id="2_275ym"]
-[ext_resource type="Shape3D" uid="uid://cc63jb4fuhdp8" path="res://lib/door/door_collision.tres" id="3_jco6p"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_l4jew"]
+size = Vector3(2, 2, 3.79309)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qdycb"]
 size = Vector3(2, 2, 0.1)
@@ -37,68 +39,54 @@ _data = {
 [node name="door" type="Node3D"]
 script = ExtResource("1_r2hxr")
 
-[node name="door_A" type="Node3D" parent="."]
+[node name="trigger" type="Area3D" parent="."]
 
-[node name="model" type="AnimatableBody3D" parent="door_A"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="trigger"]
+shape = SubResource("BoxShape3D_l4jew")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="door_A/model"]
+[node name="door_A" type="AnimatableBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="door_A"]
 shape = SubResource("BoxShape3D_qdycb")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="door_A/model"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="door_A"]
 gi_mode = 2
 mesh = SubResource("BoxMesh_blovd")
-skeleton = NodePath("../../trigger")
+skeleton = NodePath("")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="door_A/model"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="door_A"]
 libraries = {
 "": SubResource("AnimationLibrary_ifia4")
 }
 
-[node name="Label3D" type="Label3D" parent="door_A/model"]
+[node name="Label3D" type="Label3D" parent="door_A"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
 billboard = 1
 double_sided = false
 text = "A
 "
 
-[node name="trigger" type="Area3D" parent="door_A"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+[node name="door_B" type="AnimatableBody3D" parent="."]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="door_A/trigger"]
-shape = ExtResource("3_jco6p")
-
-[node name="door_B" type="Node3D" parent="."]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
-
-[node name="model" type="AnimatableBody3D" parent="door_B"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="door_B/model"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="door_B"]
 shape = SubResource("BoxShape3D_qdycb")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="door_B/model"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="door_B"]
 gi_mode = 2
 mesh = SubResource("BoxMesh_blovd")
-skeleton = NodePath("../../trigger")
+skeleton = NodePath("")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="door_B/model"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="door_B"]
 playback_process_mode = 0
 libraries = {
 "": SubResource("AnimationLibrary_ifia4")
 }
 
-[node name="Label3D" type="Label3D" parent="door_B/model"]
+[node name="Label3D" type="Label3D" parent="door_B"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
 billboard = 1
 double_sided = false
 text = "B"
 
-[node name="trigger" type="Area3D" parent="door_B"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="door_B/trigger"]
-shape = ExtResource("3_jco6p")
-
-[connection signal="body_entered" from="door_A/trigger" to="." method="on_door_A_entered"]
-[connection signal="body_exited" from="door_A/trigger" to="." method="on_door_A_exited"]
-[connection signal="body_entered" from="door_B/trigger" to="." method="on_door_B_entered"]
-[connection signal="body_exited" from="door_B/trigger" to="." method="on_door_B_exited"]
+[connection signal="body_entered" from="trigger" to="." method="_on_door_entered"]
+[connection signal="body_exited" from="trigger" to="." method="_on_door_exited"]
